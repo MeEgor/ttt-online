@@ -11,7 +11,7 @@ const routerConfig: Routes = [
     component: AuthComponent 
   },
   { 
-    path: 'game', 
+    path: 'game/:uuid', 
     component: GameComponent, 
     canActivate: [AngularTokenService] 
   }

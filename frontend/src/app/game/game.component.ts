@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { GameActionCableService } from './game.service'
 
 @Component({
   selector: 'app-game',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['game.component.sass']
 })
 export class GameComponent {
-  constructor() { }
+  constructor(
+    private gameCable: GameActionCableService,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const gameUuid = params["uuid"]
+      this.gameCable.subscribeMe("foo", gameUuid)
+    })
+  }
 }
