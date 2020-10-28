@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
 
 import { GameComponent } from './game.component'
+import { NewGameComponent } from './new/new.component'
 
 @NgModule({
   imports: [
@@ -10,10 +11,12 @@ import { GameComponent } from './game.component'
     RouterModule
   ],
   declarations: [
-    GameComponent
+    GameComponent,
+    NewGameComponent
   ],
   exports: [
-    GameComponent
+    GameComponent,
+    NewGameComponent
   ]
 })
 export class GameModule { }

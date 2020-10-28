@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module'
 import { AuthModule } from './auth/auth.module'
 import { GameModule } from './game/game.module'
 import { AngularTokenModule } from 'angular-token'
+import { HeaderComponent } from './layout/header/header.component'
+import { AuthGuard } from './auth/auth.guard'
 
 @NgModule({
   imports: [
@@ -19,9 +21,17 @@ import { AngularTokenModule } from 'angular-token'
 
     AngularTokenModule.forRoot({
       apiBase: 'http://localhost:3000/api/v1',
+      signInRedirect: 'sign-in',
+      signInStoredUrlStorageKey: 'redirectTo'
     })
   ],
-  declarations: [ AppComponent ],
+  declarations: [ 
+    AppComponent,
+    HeaderComponent
+  ],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

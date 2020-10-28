@@ -1,0 +1,57 @@
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-fifths is-offset-one-fifth">
+        <h1 class="title">Sign In</h1>
+
+        <div class="notification is-danger" *ngIf="errors">
+          <button (click)="closeNotification()" class="delete"></button>
+          <div *ngFor="let error of errors">{{ error }}</div>
+        </div>
+        
+        <form #signInForm="ngForm" (ngSubmit)="onSubmit()">
+          <div class="field">
+            <label class="label">Email</label>
+      
+            <div class="control">
+              <input class="input" type="email"
+                placeholder="Email"
+                required
+                [(ngModel)]="signInData.login"
+                name="email"
+              >
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label">Password</label>
+      
+            <div class="control">
+              <input class="input" type="password"
+                placeholder="Password"
+                required
+                [(ngModel)]="signInData.password"
+                name="password"
+              >
+            </div>
+          </div>
+      
+          <div class="field is-grouped">
+            <div class="control">
+              <button 
+              class="button is-link" 
+              type="submit"
+              [disabled]="!signInForm.form.valid"
+              [ngClass]="{'is-loading': loading}"
+              >Sign in</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="box mt-4">
+          <p>Don't have an account? <a [routerLink]="['/register']">Sign up</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -10,10 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_26_090330) do
+ActiveRecord::Schema.define(version: 2020_10_28_043332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+
+  create_table "game_moves", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.bigint "game_id", null: false
+    t.integer "top", null: false
+    t.integer "left", null: false
+    t.string "sign", limit: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_game_moves_on_game_id"
+    t.index ["player_id"], name: "index_game_moves_on_player_id"
+    t.index ["sign"], name: "index_game_moves_on_sign"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
+    t.integer "height", null: false
+    t.integer "width", null: false
+    t.string "state", default: "started", null: false
+    t.bigint "player_1_id", null: false
+    t.bigint "player_2_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "winner_id"
+    t.index ["player_1_id"], name: "index_games_on_player_1_id"
+    t.index ["player_2_id"], name: "index_games_on_player_2_id"
+    t.index ["winner_id"], name: "index_games_on_winner_id"
+  end
 
   create_table "players", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -39,4 +68,9 @@ ActiveRecord::Schema.define(version: 2020_10_26_090330) do
     t.index ["uid", "provider"], name: "index_players_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "game_moves", "games"
+  add_foreign_key "game_moves", "players"
+  add_foreign_key "games", "players", column: "player_1_id"
+  add_foreign_key "games", "players", column: "player_2_id"
+  add_foreign_key "games", "players", column: "winner_id"
 end

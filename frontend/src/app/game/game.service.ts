@@ -6,13 +6,15 @@ import * as ActionCable from 'actioncable'
 })
 export class GameActionCableService {
   private consumer: any
+  private gameChannel: any
 
   constructor() {}
 
   subscribeMe(token: string, gameUuid: string) {
     this.consumer = ActionCable.createConsumer(`ws://localhost:3000/cable?access_token=${token}`)
     console.log("Trying connection")
-    this.consumer.subscriptions.create({
+
+    this.gameChannel = this.consumer.subscriptions.create({
       channel: "GameChannel",
       game: gameUuid
     }, {
@@ -27,4 +29,6 @@ export class GameActionCableService {
       }
     })
   }
+
+  move() {}
 }
