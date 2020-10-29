@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GameActionCableService } from './game.service'
+import { GameWsService } from './game-ws.service'
 
 @Component({
   selector: 'app-game',
@@ -9,7 +9,7 @@ import { GameActionCableService } from './game.service'
 })
 export class GameComponent {
   constructor(
-    private gameCable: GameActionCableService,
+    private gameCable: GameWsService,
     private route: ActivatedRoute
   ) { }
 

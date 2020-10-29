@@ -1,6 +1,19 @@
 module Api
   module V1
-    class GameController < ApplicationController
+    class GamesController < ApplicationController
+
+      def create
+        result = GameManager::CreateService.call params, current_player
+        if result.success?
+          render_game result.data[:game], status: 201
+        else
+          render json: { 
+            message: result.message,
+            data: result.data
+          }, status: 422
+        end
+      end
+
       def move
         # game_id = resource_game.id
         # player_id = params[:player]
@@ -41,6 +54,13 @@ module Api
       end
 
       private 
+
+      def render_game(game, options = {})
+        options = options.reverse_merge(
+          json: game
+        )
+        render options
+      end
 
       def resource_game
         @game ||= Game.find_by_uuid params[:uuid]

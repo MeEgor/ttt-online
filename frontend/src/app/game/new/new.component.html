@@ -1,1 +1,59 @@
-<h2>New Game</h2>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-fifths is-offset-one-fifth">
+        <h1 class="title">New Game</h1>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="columns">
+            <div class="column">
+              <div class="field">
+                <label class="label">Width</label>
+          
+                <div class="control">
+                  <input class="input" type="number" min="3" placeholder="3" 
+                  formControlName="width"
+                  [disabled]="loading">
+                </div>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="field">
+                <label class="label">Height</label>
+          
+                <div class="control">
+                  <input class="input" type="number" min="3" placeholder="3" 
+                  formControlName="height"
+                  [disabled]="loading">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+          <div class="field">
+            <label class="label">Win row size</label>
+      
+            <div class="control">
+              <input class="input" type="number" min="3" placeholder="3" 
+              formControlName="winRowSize"
+              [disabled]="loading">
+            </div>
+          </div>
+
+          <div class="field is-grouped">
+            <div class="control">
+              <button 
+              class="button is-link" 
+              type="submit"
+              [disabled]="!form.valid"
+              [ngClass]="{'is-loading': loading}"
+              >Create</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

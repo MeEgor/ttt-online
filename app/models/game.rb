@@ -1,8 +1,8 @@
 class Game < ApplicationRecord
-  belongs_to :player_1, class_name: "Player"
-  belongs_to :player_2, class_name: "Player"
+  belongs_to :player_1, class_name: "Player", optional: true
+  belongs_to :player_2, class_name: "Player", optional: true
 
-  has_many :moves, class_name: "GameMove"
+  has_many :moves, class_name: "GameMove", dependent: :destroy
 
   def field
     field = Array.new(height) { Array.new(width) }

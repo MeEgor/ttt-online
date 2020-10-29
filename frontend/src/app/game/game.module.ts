@@ -4,11 +4,13 @@ import { RouterModule } from '@angular/router'
 
 import { GameComponent } from './game.component'
 import { NewGameComponent } from './new/new.component'
+import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   declarations: [
     GameComponent,

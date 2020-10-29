@@ -4,7 +4,7 @@ import * as ActionCable from 'actioncable'
 @Injectable({
   providedIn: 'root'
 })
-export class GameActionCableService {
+export class GameWsService {
   private consumer: any
   private gameChannel: any
 
