@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators"
+import { environment } from 'src/environments/environment';
 
 export interface CreateGameParams {
   width: number
@@ -17,7 +18,7 @@ export interface GameCreateResponse {
   providedIn: 'root'
 })
 export class GameApiService {
-  private apiHost = "http://localhost:3000"
+  private readonly apiHost = environment.apiHost
   private apiPath = "api/v1"
 
   constructor(
