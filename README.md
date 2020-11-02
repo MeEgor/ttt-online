@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Превставляю вам Tik Tak Toe Online (TTT) 
+http://174.138.16.174/
 
-Things you may want to cover:
+Чтобы сыграть нужен аккаунт (http://174.138.16.174/register) или можно воспользоваться одним из готовых
+  * foo1@qwe.qwe / qweqweqwe
+  
+  * foo2@qwe.qwe / qweqweqwe
+  
+  * foo3@qwe.qwe / qweqweqwe
+  
+Можно настроить размер поля и количество знаков в ряд для победы
 
-* Ruby version
+После создания игры, нужно передать ссылку сопернику. Сопернику нужно будет войти в аккаунт или создать новый
 
-* System dependencies
+Первым ходит тот, кто создал игру. Его знак - Х
 
-* Configuration
+Все кто зашел после второго игрока становятся наблюдателями. Они могут смотреть как проходит игра
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Игра заканчивается, когда один из игроков собирает линию выбранной длинны, либо когда заканчиваются ходы
