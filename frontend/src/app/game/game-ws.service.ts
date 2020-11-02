@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import * as ActionCable from 'actioncable'
 import { Subject } from 'rxjs'
 import { GameState } from './game.store'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class GameWsService {
 
   private _recived = new Subject<GameState>()
   readonly recived$ = this._recived.asObservable()
+  private readonly cableHost = environment.cableHost
 
   constructor() {}
 
@@ -27,7 +29,7 @@ export class GameWsService {
 
     this.gameUuid = gameUuid
     this.consumer = ActionCable.createConsumer(`
-      ws://localhost:3000/cable?access_token=${accessToken}&uid=${uid}&client=${client}`
+      ${this.cableHost}/cable?access_token=${accessToken}&uid=${uid}&client=${client}`
     )
 
     console.log("Trying connection")

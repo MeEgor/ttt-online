@@ -8,7 +8,6 @@ import { AngularTokenService } from 'angular-token';
   templateUrl: "./header.component.html"
 })
 export class HeaderComponent {
-
   constructor(
     private tokenService: AngularTokenService,
     private router: Router

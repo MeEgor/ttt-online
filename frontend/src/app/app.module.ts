@@ -10,6 +10,7 @@ import { AngularTokenModule } from 'angular-token'
 import { HeaderComponent } from './layout/header/header.component'
 import { AuthGuard } from './auth/auth.guard'
 import { PageNotFoundComponent } from './404.component'
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { PageNotFoundComponent } from './404.component'
     GameModule,
 
     AngularTokenModule.forRoot({
-      apiBase: 'http://localhost:3000/api/v1',
+      apiBase: `${environment.apiHost}/api/v1`,
       signInRedirect: 'sign-in',
       signInStoredUrlStorageKey: 'redirectTo'
     })
