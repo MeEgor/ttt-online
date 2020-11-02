@@ -5,6 +5,10 @@ shared_dir = "#{app_dir}/tmp"
 rails_env = ENV['RAILS_ENV'] || "production"
 environment rails_env
 
+max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
+min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
+threads min_threads_count, max_threads_count
+
 # Set up socket location
 bind "unix://#{shared_dir}/sockets/puma.sock"
 
