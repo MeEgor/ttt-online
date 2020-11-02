@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core'
 import * as ActionCable from 'actioncable'
+import { Subject } from 'rxjs'
+import { GameState } from './game.store'
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +9,27 @@ import * as ActionCable from 'actioncable'
 export class GameWsService {
   private consumer: any
   private gameChannel: any
+  private gameUuid: string
+
+  private _recived = new Subject<GameState>()
+  readonly recived$ = this._recived.asObservable()
 
   constructor() {}
 
-  subscribeMe(token: string, gameUuid: string) {
-    this.consumer = ActionCable.createConsumer(`ws://localhost:3000/cable?access_token=${token}`)
+  subscribeMe(params: {
+    accessToken: string, 
+    uid: string, 
+    client: string, 
+    gameUuid: string
+  }) {
+    const { gameUuid, accessToken, uid, client } = params
+    const subject = this._recived
+
+    this.gameUuid = gameUuid
+    this.consumer = ActionCable.createConsumer(`
+      ws://localhost:3000/cable?access_token=${accessToken}&uid=${uid}&client=${client}`
+    )
+
     console.log("Trying connection")
 
     this.gameChannel = this.consumer.subscriptions.create({
@@ -20,15 +38,25 @@ export class GameWsService {
     }, {
       connected() {
         console.log("Subscription is ready for use")
+        this.perform("join")
       },
       disconnected() {
         console.log("Service terminated by WB server")
       },
-      received(data) {
+      received(data: GameState) {
         console.log("This is the data received: ", data)
+        subject.next(data)
       }
     })
   }
 
-  move() {}
+  move(top: number, left: number) {
+    this.gameChannel.perform("move", {
+      top, left
+    })
+  }
+
+  // join() {
+  //   this.gameChannel.perform("join")
+  // }
 }

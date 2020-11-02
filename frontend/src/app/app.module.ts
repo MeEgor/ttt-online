@@ -9,6 +9,7 @@ import { GameModule } from './game/game.module'
 import { AngularTokenModule } from 'angular-token'
 import { HeaderComponent } from './layout/header/header.component'
 import { AuthGuard } from './auth/auth.guard'
+import { PageNotFoundComponent } from './404.component'
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { AuthGuard } from './auth/auth.guard'
   ],
   declarations: [ 
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    PageNotFoundComponent
   ],
   providers: [
     AuthGuard

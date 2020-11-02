@@ -11,6 +11,8 @@ module GameManager
 
     def call
       game = Game.new permitted_attributes
+      game.player_1 = current_player
+      
       if game.save
         success_result data: { game: game.reload }
       else

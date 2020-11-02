@@ -1,0 +1,37 @@
+.overlay
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  background-color: rgba(255, 255, 255, .5)
+
+  display: flex
+  flex-direction: column
+  justify-content: center
+  text-align: center
+  font-weight: 800
+  font-size: 16px
+
+.game-field
+  display: inline-flex
+  flex-direction: column
+  border: 1px solid lightgrey
+  position: relative
+
+.game-field-row
+  display: flex
+  flex-direction: row
+
+.game-field-cell
+  width: 50px
+  height: 50px
+  display: flex
+  align-items: center
+  justify-content: center
+  border: 1px solid lightgrey
+
+.game-field-cell--empty
+  &:hover
+    border-color: green
+    cursor: pointer

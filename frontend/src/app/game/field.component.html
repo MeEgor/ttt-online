@@ -1,0 +1,63 @@
+<ng-container *ngIf="field$ | async as field">
+  <div class="game-field">
+    <div class="overlay" *ngIf="gameCompleted$ | async; else gameNotCompleted">
+      Game completed
+
+      <div *ngIf="isDraw$ | async; else someoneWins">
+        Nobody wins
+      </div>
+
+      <ng-template #someoneWins>
+        <ng-container *ngIf="isPlayer$ | async; else isWatcher">
+          <div *ngIf="isWinner$ | async; else youLoose">
+            You win!
+          </div>
+
+          <ng-template #youLoose>
+            <div>
+              You loose!
+            </div>
+          </ng-template>
+        </ng-container>
+
+        <ng-template #isWatcher>
+          <ng-container *ngrxLet="players$ as players">
+            <ng-container *ngrxLet="winner$ as winner">
+              <div *ngIf="players[0] == winner">
+                Player 1 wins
+              </div>
+              <div *ngIf="players[1] == winner">
+                Player 2 wins
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+      </ng-template>
+    </div>
+
+    <ng-template #gameNotCompleted>
+      <ng-container *ngIf="!(isPlayer$ | async); else isPlayer">
+        <div class="overlay" style="background-color: transparent;"></div>
+      </ng-container>
+      <ng-template #isPlayer>
+        <div class="overlay" *ngIf="waitingPlayers$ | async">
+          Waiting other player
+        </div>
+  
+        <div class="overlay" *ngIf="!(yourTurn$ | async)">
+          Waiting other player turn
+        </div>
+      </ng-template>
+    </ng-template>
+
+    <div class="game-field-row" *ngFor="let row of field; let i = index;">
+      <div class="game-field-cell" *ngFor="let cell of row; let j = index;" [ngClass]="{
+        'game-field-cell--empty': cell == null
+      }"
+      (click)="select(i, j, cell)"
+      >
+        <div class="cell-content">{{ cell }}</div>
+      </div>
+    </div>
+  </div>
+</ng-container>

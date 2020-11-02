@@ -8,4 +8,16 @@
       Tic Tac Toe Online
     </h2>
   </div>
+
+  <div class="navbar-menu" *ngIf="userSignedIn">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-light" (click)="logOut()">
+            Log out
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>

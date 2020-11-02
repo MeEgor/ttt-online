@@ -27,6 +27,7 @@ export class RegisterComponent {
       res => {
         this.loading = false
         let redirectUrl = localStorage.getItem('redirectTo')
+        localStorage.removeItem('redirectTo')
         if (!redirectUrl) {
           redirectUrl = "/game/new"
         }
